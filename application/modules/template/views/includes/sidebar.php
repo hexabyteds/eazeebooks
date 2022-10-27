@@ -461,7 +461,7 @@
                         echo "active";
                     } else {
                         echo " ";
-                    }?>"><a href="<?php echo base_url('coa_test') ?>"><?php echo display('c_o_a_T'); ?></a></li>
+                    }?>"><a href="<?php echo base_url('coa_test') ?>"><?php echo "coa_test"; ?></a></li>
                 <?php }?>
 
                 <!-- END TEST COA -->

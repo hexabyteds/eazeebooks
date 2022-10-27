@@ -78,12 +78,13 @@ function account_data_tree() {
 function account_data_child($node) {
   //     // $data['title']      = display('c_o_a');
   
-  $shead = $this->db->select('*')->from('acc_coa')->where('PHeadName',$node)->get()->result();
-
+  // $shead = $this->db->select('*')->from('acc_coa')->where('PHeadName',$node)->get()->result();
+  $shead = $this->db->select('*')->from('acc_coa')->get()->result();
+ 
  
       // $shead['phead']   = $this->account_model->first_child($node);
   
-  
+   
       echo json_encode($shead);
   }
 
