@@ -139,7 +139,6 @@
                 <h3 class="modal-title" style="text-align :left">Create Account</h3>
               </div>
               <div class="modal-body">
-                <!-- <div class="col-md-2"></div> -->
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-4 form-group">
@@ -163,11 +162,10 @@
                   </div>
                   <div class="row">
                     <div class="col-md-4">
-
                     </div>
                     <div class="col-md-8 mt-2 form-group">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="is_subCategory">
+                        <input type="checkbox" name="is_subCategory" class="custom-control-input" id="is_subCategory">
                         <label class="custom-control-label" for="is_subCategory"> Make This a Sub-Account</label>
                       </div>
                     </div>
@@ -187,7 +185,7 @@
                       <label>Account Name</label>
                     </div>
                     <div class="col-md-8 form-group">
-                      <input type="text" name="lastname" value="<?php echo $fetch['lastname'] ?>" class="form-control" required="required" />
+                      <input type="text" name="new_account" value="<?php echo $fetch['new_account'] ?>" class="form-control" required="required" />
                     </div>
                   </div>
 
@@ -196,7 +194,7 @@
                       <label>Account Code</label>
                     </div>
                     <div class="col-md-8 form-group">
-                      <input type="text" name="address" value="<?php echo $fetch['address'] ?>" class="form-control" required="required" />
+                      <input type="text" name="txtHeadCode" value="<?php echo $fetch['txtHeadCode'] ?>" class="form-control" required="required" />
                     </div>
                   </div>
                   <div class="row mt-3">
@@ -208,8 +206,6 @@
                       </textarea>
                     </div>
                   </div>
-
-
                 </div>
               </div>
               <div style="clear:both;"></div>
@@ -222,12 +218,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
-
     <div class="modal fade" id="treeviewmodal" role="dialog">
 
       <div class="modal-dialog">
@@ -293,7 +283,6 @@
           // debugger;
         });
 
-        var obj;
         $('#new_acct_modal').on('click', function() {
           $('#update_modal').modal('show');
           $('#is_subCategory').trigger('change');
@@ -310,7 +299,7 @@
               for (i = 0; i < result.length; i++) {
                 if (result[i].HeadLevel == '0') {
                   // console.log(result[i].HeadName)
-                  html += '<option value=' + result[i].HeadName + '>' + result[i].HeadName + '</option>';
+                  html += '<option data-category='+result[i].HeadLevel +' value=' + result[i].HeadName + '>' + result[i].HeadName + '</option>';
                 }
               }
               $('#category').html(html);
@@ -344,8 +333,10 @@
                 // 3 times
                 // console.log(dataResult[i].HeadName)
                 if (dataResult[i].PHeadName == category) {
-                  console.log(category);
-                  html += '<option value=' + dataResult[i].HeadName + '>' + dataResult[i].HeadName + '</option>';
+                  console.log(dataResult[i].HeadLevel);
+                  var level=0;
+                  level=parseInt(dataResult[i].HeadLevel) + 1;
+                  html += '<option data-subCategory='+ level + ' value=' + dataResult[i].HeadName + '>' + dataResult[i].HeadName + '</option>';
                 }
 
               }
@@ -363,15 +354,21 @@
 
         $('#new_account_submit').on('submit', function(e) {
           e.preventDefault();
+          let category_level=  $('#category :selected').attr('data-category');
+          let subCategory_level=  $('#sub_category :selected').attr('data-subCategory');
+
           $('#update_modal').modal('hide');
+          var _form = $(this);
           // debugger;
           $.ajax({
-            url: "account/account/insert_coa",
+            url: "account/account/insert_coa/"+category_level+"/"+subCategory_level,
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             cache: false,
+            data: _form.serializeArray(),
             success: function(dataResult) {
+              console.log("yipiiii data is storeddddd");
               
             },
             error: function(result) {
@@ -391,18 +388,15 @@
          }
         });
 
-       function fetch_sub(){
-          // var category_id=$(this).val();
+        function fetch_sub(){
           // debugger
           var sub_category = $('#sub_category :selected').val();
-          console.log('category',sub_category);
-          // debugger;
           $.ajax({
             url: "account/account/account_data_child/" + sub_category,
             type: "POST",
-            dataType: "json",
             contentType: "application/json; charset=utf-8",
             cache: false,
+            dataType: "json",
             success: function(dataResult) {
               console.log(dataResult);
               // debugger;
@@ -426,29 +420,6 @@
           });
         }
       });
-
-
-
-
-      // debugger;
-      // var base_url = $("#base_url").val();
-      // $.ajax({
-      //     url : base_url + "account/account/account_data",
-      //     type: "GET",
-      //     dataType: "json",
-      //     success: function(data)
-      //     {
-      //       debugger;
-      //       alert('Error get data from ajax');
-      //       //  $('#txtCode_'+sl).val(data);
-      //       $('#myTree').treeview({data: jsonData});
-      //     },
-      //     error: function (jqXHR, textStatus, errorThrown)
-      //     {
-      //       debugger;
-      //         alert('Error get data from ajax');
-      //     }
-      // });
     </script>
 
   </div>

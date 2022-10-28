@@ -137,155 +137,162 @@ function account_data_child($node) {
        
   public function selectedform($id){
 
-        $role_reult = $this->account_model->treeview_selectform($id);
-        if ($role_reult){
-            $html = "";
-            $html .= form_open('','id="treeview_form" class="form-vertical"');
-      $html .= "<div id=\"newData\" class=\"row\">
-      <div class=\"col-sm-12\">
-      <div class=\"row form-custom\">
-        <label class=\"col-sm-3\"><b>Head Code</b></label>
-        <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadCode\" id=\"txtHeadCode\" class=\"form_input form-control\"  value=\"".$role_reult->HeadCode."\" readonly=\"readonly\"/></div>
-      </div>
-       </div>
-  
-     <div class=\"col-sm-12\">
-      <div class=\"row form-custom\">
-        <label class=\"col-sm-3\"><b>Head Name</b></label>
-        <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadName\" id=\"txtHeadName\" class=\"form_input form-control\" value=\"".$role_reult->HeadName."\"/>
-<input type=\"hidden\" name=\"HeadName\" id=\"HeadName\" class=\"form_input\" value=\"".$role_reult->HeadName."\"/>
-        </div>
-      </div>
-      </div>
-     <div class=\"col-sm-12\">
-      <div class=\"row form-custom\">
-        <label class=\"col-sm-3\"><b>Parent Head</b></label>
-        <div class=\"col-sm-9\"><input type=\"text\" name=\"txtPHead\" id=\"txtPHead\" class=\"form_input form-control\" readonly=\"readonly\" value=\"".$role_reult->PHeadName."\"/></div>
-      </div>
-      </div>
-       <div class=\"col-sm-12\">
-      <div class=\"row form-custom\">
-
-        <label class=\"col-sm-3\"><b>Head Level</b></label>
-        <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadLevel\" id=\"txtHeadLevel\" class=\"form_input form-control\" readonly=\"readonly\" value=\"".$role_reult->HeadLevel."\"/></div>
-      </div>
-      </div>
-       <div class=\"col-sm-12\">
-      <div class=\"row form-custom\">
-        <label class=\"col-sm-3\"><b>Head Type</b></label>
-        <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadType\" id=\"txtHeadType\" class=\"form_input form-control\" readonly=\"readonly\" value=\"".$role_reult->HeadType."\"/></div>
-      </div>
-      </div>
-
-       <div class=\"col-sm-12\">
-      <div class=\"row form-custom\">
-         <div class=\"col-sm-9 col-sm-offset-3\">
-         <div class=\"align-center\">
-           <div class=\"mr-15\">
-           <input type=\"checkbox\" name=\"IsTransaction\" value=\"1\" class=\"mr-5\" id=\"IsTransaction\" size=\"28\"  onchange=\"IsTransaction_change()\"";
-           if($role_reult->IsTransaction==1){ $html .="checked";}
-            $html .= "/><label for=\"IsTransaction\"> IsTransaction</label>
-            </div>
-
-            <div class=\"mr-15\">
-           <input type=\"checkbox\" value=\"1\" name=\"IsActive\" class=\"mr-5\" id=\"IsActive\" size=\"28\"";
-            if($role_reult->IsActive==1){ $html .="checked";}
-            $html .= "/><label for=\"IsActive\"> IsActive</label>
-            </div>
-
-            <div class=\"mr-15\">
-           <input type=\"checkbox\" value=\"1\" name=\"IsGL\" class=\"mr-5\" id=\"IsGL\" size=\"28\" onchange=\"IsGL_change();\"";
-           if($role_reult->IsGL==1){ $html .="checked";}
-            $html .= "/><label for=\"IsGL\"> IsGL</label>
+    $role_reult = $this->account_model->treeview_selectform($id);
+    if ($role_reult){
+                $html = "";
+                $html .= form_open('','id="treeview_form" class="form-vertical"');
+          $html .= "<div id=\"newData\" class=\"row\">
+          <div class=\"col-sm-12\">
+          <div class=\"row form-custom\">
+            <label class=\"col-sm-3\"><b>Head Code</b></label>
+            <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadCode\" id=\"txtHeadCode\" class=\"form_input form-control\"  value=\"".$role_reult->HeadCode."\" readonly=\"readonly\"/></div>
+          </div>
+          </div>
+      
+        <div class=\"col-sm-12\">
+          <div class=\"row form-custom\">
+            <label class=\"col-sm-3\"><b>Head Name</b></label>
+            <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadName\" id=\"txtHeadName\" class=\"form_input form-control\" value=\"".$role_reult->HeadName."\"/>
+              <input type=\"hidden\" name=\"HeadName\" id=\"HeadName\" class=\"form_input\" value=\"".$role_reult->HeadName."\"/>
             </div>
           </div>
+          </div>
+        <div class=\"col-sm-12\">
+          <div class=\"row form-custom\">
+            <label class=\"col-sm-3\"><b>Parent Head</b></label>
+            <div class=\"col-sm-9\"><input type=\"text\" name=\"txtPHead\" id=\"txtPHead\" class=\"form_input form-control\" readonly=\"readonly\" value=\"".$role_reult->PHeadName."\"/></div>
+          </div>
+          </div>
+          <div class=\"col-sm-12\">
+          <div class=\"row form-custom\">
 
-        </div>";
-      $html .= "</div>
-      </div>
-       <div class=\"col-sm-12\">
-       <div class=\"row mx-0\">
-                    <div class=\"col-sm-9 col-sm-offset-3\">";
-                     $html .="<input type=\"button\" name=\"btnNew\" id=\"btnNew\" value=\"New\" onClick=\"newHeaddata(".$role_reult->HeadCode.")\" class=\"btn btn-sub btn-info\"/>
-                      <input type=\"btn\" name=\"btnSave\" id=\"btnSave\" value=\"Save\" disabled=\"disabled\" class=\"btn btn-sub btn-success\" onclick=\"treeSubmit()\"/>";
-                     
-          $html .=" <input type=\"button\" name=\"btnUpdate\" id=\"btnUpdate\" value=\"Update\" onclick=\"treeSubmit()\" class=\"btn btn-sub btn-primary\"/>  <button type=\"button\" class=\"btn btn-sub btn-danger\" data-dismiss=\"modal\">Close</button></div>";
-    $html .= "</div></div>
- </form>
-            ";
-        }
+            <label class=\"col-sm-3\"><b>Head Level</b></label>
+            <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadLevel\" id=\"txtHeadLevel\" class=\"form_input form-control\" readonly=\"readonly\" value=\"".$role_reult->HeadLevel."\"/></div>
+          </div>
+          </div>
+          <div class=\"col-sm-12\">
+          <div class=\"row form-custom\">
+            <label class=\"col-sm-3\"><b>Head Type</b></label>
+            <div class=\"col-sm-9\"><input type=\"text\" name=\"txtHeadType\" id=\"txtHeadType\" class=\"form_input form-control\" readonly=\"readonly\" value=\"".$role_reult->HeadType."\"/></div>
+          </div>
+          </div>
 
-        echo json_encode($html);
+          <div class=\"col-sm-12\">
+          <div class=\"row form-custom\">
+            <div class=\"col-sm-9 col-sm-offset-3\">
+            <div class=\"align-center\">
+              <div class=\"mr-15\">
+              <input type=\"checkbox\" name=\"IsTransaction\" value=\"1\" class=\"mr-5\" id=\"IsTransaction\" size=\"28\"  onchange=\"IsTransaction_change()\"";
+              if($role_reult->IsTransaction==1){ $html .="checked";}
+                $html .= "/><label for=\"IsTransaction\"> IsTransaction</label>
+                </div>
+
+                <div class=\"mr-15\">
+              <input type=\"checkbox\" value=\"1\" name=\"IsActive\" class=\"mr-5\" id=\"IsActive\" size=\"28\"";
+                if($role_reult->IsActive==1){ $html .="checked";}
+                $html .= "/><label for=\"IsActive\"> IsActive</label>
+                </div>
+
+                <div class=\"mr-15\">
+              <input type=\"checkbox\" value=\"1\" name=\"IsGL\" class=\"mr-5\" id=\"IsGL\" size=\"28\" onchange=\"IsGL_change();\"";
+              if($role_reult->IsGL==1){ $html .="checked";}
+                $html .= "/><label for=\"IsGL\"> IsGL</label>
+                </div>
+              </div>
+
+            </div>";
+          $html .= "</div>
+          </div>
+          <div class=\"col-sm-12\">
+          <div class=\"row mx-0\">
+                                <div class=\"col-sm-9 col-sm-offset-3\">";
+                                $html .="<input type=\"button\" name=\"btnNew\" id=\"btnNew\" value=\"New\" onClick=\"newHeaddata(".$role_reult->HeadCode.")\" class=\"btn btn-sub btn-info\"/>
+                                  <input type=\"btn\" name=\"btnSave\" id=\"btnSave\" value=\"Save\" disabled=\"disabled\" class=\"btn btn-sub btn-success\" onclick=\"treeSubmit()\"/>";
+                                
+                      $html .=" <input type=\"button\" name=\"btnUpdate\" id=\"btnUpdate\" value=\"Update\" onclick=\"treeSubmit()\" class=\"btn btn-sub btn-primary\"/>  <button type=\"button\" class=\"btn btn-sub btn-danger\" data-dismiss=\"modal\">Close</button></div>";
+                $html .= "</div></div>
+            </form>
+                ";
     }
 
-    public function insert_coa(){
-    $headcode    = $this->input->post('txtHeadCode',TRUE);
-    $HeadName    = $this->input->post('txtHeadName',TRUE);
-    $PHeadName   = $this->input->post('txtPHead',TRUE);
-    $HeadLevel   = $this->input->post('txtHeadLevel',TRUE);
-    $txtHeadType = $this->input->post('txtHeadType',TRUE);
-    $isact       = $this->input->post('IsActive',TRUE);
-    //     if(!empty($_POST['isActic'])) {
-
-    //      $IsActive    = 1; 
-
-    // }
-    // else
-    // {
-    //       $IsActive    = 0; 
-    // }
-  
-    $IsActive    = (!empty($isact)?$isact:0);
-    $trns        = $this->input->post('IsTransaction',TRUE);
-    $IsTransaction = (!empty($trns)?$trns:0);
-    $isgl        = $this->input->post('IsGL',TRUE);
-     $IsGL       = (!empty($isgl)?$isgl:0);
-    $createby    = $this->session->userdata('id');
-    $createdate  = date('Y-m-d H:i:s');
-       $postData = array(
-      'HeadCode'       =>  $headcode,
-      'HeadName'       =>  $HeadName,
-      'PHeadName'      =>  $PHeadName,
-      'HeadLevel'      =>  $HeadLevel,
-      'IsActive'       =>  $IsActive,
-      'IsTransaction'  =>  $IsTransaction,
-      'IsGL'           =>  $IsGL,
-      'HeadType'       => $txtHeadType,
-      'IsBudget'       => 0,
-      'CreateBy'       => $createby,
-      'CreateDate'     => $createdate,
-    ); 
- $upinfo = $this->db->select('*')
-            ->from('acc_coa')
-            ->where('HeadCode',$headcode)
-            ->get()
-            ->row();
-            if(empty($upinfo)){
-  $this->db->insert('acc_coa',$postData);
-  $data['status']  = true;
-  $data['message'] = 'Successfully Saved';
-}
-else{
-
-$hname =$this->input->post('HeadName',TRUE);
-$updata = array(
-'PHeadName'      =>  $HeadName,
-);
-
-            
-  $this->db->where('HeadCode',$headcode)
-      ->update('acc_coa',$postData);
-  $this->db->where('PHeadName',$hname)
-      ->update('acc_coa',$updata);
-
-      $data['status']  = true;
-      $data['message'] = 'Successfully Updated';
-}
-
-
-        
-        echo json_encode($data);
+    echo json_encode($html);
   }
+
+    public function insert_coa($category_level,$subCategory_level){
+
+      if($this->input->post('is_subCategory',TRUE)){
+        $PHeadName=$this->input->post('fetch_sub_options',TRUE);
+        $HeadName=$this->input->post('new_account',TRUE);
+        $HeadLevel   = $subCategory_level;
+      }
+      else{
+          $HeadName    = $this->input->post('new_account',TRUE);
+          $PHeadName   = $this->input->post('category',TRUE);
+          $HeadLevel   = $category_level;
+
+      }
+      
+      // $txtHeadType = $this->input->post('txtHeadType',TRUE);
+      $txtHeadType = "A";
+      $headcode    = $this->input->post('txtHeadCode',TRUE);
+      $isact       = 1;
+      //     if(!empty($_POST['isActic'])) {
+
+      //      $IsActive    = 1; 
+
+      // }
+      // else
+      // {
+      //       $IsActive    = 0; 
+      // }
+  
+      $IsActive    = (!empty($isact)?$isact:0);
+      $trns        = $this->input->post('IsTransaction',TRUE);
+      $IsTransaction = (!empty($trns)?$trns:0);
+      $isgl        = $this->input->post('IsGL',TRUE);
+      $IsGL       = (!empty($isgl)?$isgl:0);
+      $createby    = $this->session->userdata('id');
+      $createdate  = date('Y-m-d H:i:s');
+      $postData = array(
+        'HeadCode'       =>  $headcode,
+        'HeadName'       =>  $HeadName,
+        'PHeadName'      =>  $PHeadName,
+        'HeadLevel'      =>  $HeadLevel,
+        'IsActive'       =>  $IsActive,
+        'IsTransaction'  =>  $IsTransaction,
+        'IsGL'           =>  $IsGL,
+        'HeadType'       => $txtHeadType,
+        'IsBudget'       => 0,
+        'CreateBy'       => $createby,
+        'CreateDate'     => $createdate,
+      ); 
+      $upinfo = $this->db->select('*')
+      ->from('acc_coa')
+      ->where('HeadCode',$headcode)
+      ->get()
+      ->row();
+      if(empty($upinfo)){
+        $this->db->insert('acc_coa',$postData);
+        $data['status']  = "yeesssss";
+        $data['message'] = 'Successfully Saved';
+      }
+      else{
+
+        $hname =$this->input->post('HeadName',TRUE);
+        $updata = array(
+        'PHeadName'      =>  $HeadName,
+        );
+        
+        $this->db->where('HeadCode',$headcode)
+            ->update('acc_coa',$postData);
+        $this->db->where('PHeadName',$hname)
+            ->update('acc_coa',$updata);
+
+            $data['status']  = true;
+            $data['message'] = 'Successfully Updated';
+      }
+        echo json_encode($data);
+    }
 
       public function newform($id){
 
