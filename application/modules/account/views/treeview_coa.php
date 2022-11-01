@@ -185,7 +185,7 @@
                       <label>Account Name</label>
                     </div>
                     <div class="col-md-8 form-group">
-                      <input type="text" name="new_account" value="<?php echo $fetch['new_account'] ?>" class="form-control" required="required" />
+                      <input id="new_account" type="text" name="new_account" value="<?php echo $fetch['new_account'] ?>" class="form-control" required="required" />
                     </div>
                   </div>
 
@@ -194,7 +194,7 @@
                       <label>Account Code</label>
                     </div>
                     <div class="col-md-8 form-group">
-                      <input type="text" name="txtHeadCode" value="<?php echo $fetch['txtHeadCode'] ?>" class="form-control" required="required" />
+                      <input id="txtHeadCode" type="text" name="txtHeadCode" value="<?php echo $fetch['txtHeadCode'] ?>" class="form-control" required="required" />
                     </div>
                   </div>
                   <div class="row mt-3">
@@ -354,19 +354,37 @@
 
         $('#new_account_submit').on('submit', function(e) {
           e.preventDefault();
+          let is_subCategory;
+          let sub_category=   $('#sub_category :selected').val();
+          let category =  $('#category :selected').val();
+          let new_account=   $('#new_account').val();
+          let fetch_sub_options=$('#fetch_sub_options :selected').val();
+          let txtHeadCode=$('#txtHeadCode').val();
+          // $('#category :selected').val();
+          if($('#is_subCategory').prop("checked")){
+            is_subCategory=1;
+          }
+          else{
+            is_subCategory=0;
+          }
+
+          var base_url = $("#base_url").val();
           let category_level=  $('#category :selected').attr('data-category');
           let subCategory_level=  $('#sub_category :selected').attr('data-subCategory');
-
+          // var newAccountData= {'sub_category':sub_category,'category':category,'new_account':new_account,'fetch_sub_options':fetch_sub_options,'txtHeadCode':txtHeadCode,'is_subCategory':is_subCategory};
+          // console.log('newAccountData',newAccountData);
           $('#update_modal').modal('hide');
-          var _form = $(this);
+          // var _form = $(this);
+          // console.log(_form);
           // debugger;
           $.ajax({
-            url: "account/account/insert_coa/"+category_level+"/"+subCategory_level,
+            url: base_url+"account/account/insert_coa/"+category_level+"/"+subCategory_level,
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             cache: false,
-            data: _form.serializeArray(),
+            data:{'sub_category':sub_category,'category':category,'new_account':new_account,'fetch_sub_options':fetch_sub_options,'txtHeadCode':txtHeadCode,'is_subCategory':is_subCategory},
+            // data: _form.serializeArray(),
             success: function(dataResult) {
               console.log("yipiiii data is storeddddd");
               
@@ -375,6 +393,7 @@
 
             }
           }); 
+          
         });
 
         $(document).on('change', '#is_subCategory', function() {

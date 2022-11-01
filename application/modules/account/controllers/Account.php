@@ -220,6 +220,17 @@ function account_data_child($node) {
 
     public function insert_coa($category_level,$subCategory_level){
 
+      $data = array(
+        'sub_category' => $this->input->post('sub_category'),
+        'category' => $this->input->post('category')
+    );
+  // $this->db->insert('items', $data);
+
+
+    echo json_encode($data);  
+        // echo json_encode($this->input->post('newAccountData'));
+        die();
+
       if($this->input->post('is_subCategory',TRUE)){
         $PHeadName=$this->input->post('fetch_sub_options',TRUE);
         $HeadName=$this->input->post('new_account',TRUE);
@@ -273,7 +284,7 @@ function account_data_child($node) {
       ->row();
       if(empty($upinfo)){
         $this->db->insert('acc_coa',$postData);
-        $data['status']  = "yeesssss";
+        $data['status']  = "yeessdddsss";
         $data['message'] = 'Successfully Saved';
       }
       else{
