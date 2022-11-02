@@ -9,7 +9,7 @@ $query = ($_POST['qry'])?$_POST['qry']:'';
 
 <?php
 	
-	$link = mysqli_connect("localhost", "root", "", "u655609438_erp");
+	$link = mysqli_connect("localhost", "root", "", "erp");
  
 // Check connection
 if($link === false){
