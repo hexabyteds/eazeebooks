@@ -377,13 +377,25 @@
           // var _form = $(this);
           // console.log(_form);
           // debugger;
+          var fdata    = frm.serialize();
+            var headcode = $('input[name=txtHeadCode]').val();
+            var headname = $('input[name=txtHeadName]').val();
+            var pheadname= $('input[name=txtPHead]').val();
+            var level    = $('input[name=txtHeadLevel]').val();
+             var type     = $('input[name=txtHeadType]').val();
+             var is_active= $('input[name=IsActive]').val();
+            var is_trans = $('input[name=IsTransaction]').val();
           $.ajax({
             url: base_url+"account/account/insert_coa/"+category_level+"/"+subCategory_level,
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             cache: false,
-            data:{'sub_category':sub_category,'category':category,'new_account':new_account,'fetch_sub_options':fetch_sub_options,'txtHeadCode':txtHeadCode,'is_subCategory':is_subCategory},
+            data : {
+              txtHeadCode:headcode,txtHeadName:headname,txtPHead:pheadname,txtHeadLevel:level,txtHeadType:type,IsActive:is_active,IsTransaction:is_trans,IsGL:is_gl,csrf_test_name:csrf_test_name
+
+            },
+            // data:{sub_category:sub_category,category:category,new_account:new_account,fetch_sub_options:fetch_sub_options,txtHeadCode:txtHeadCode,is_subCategory:is_subCategory},
             // data: _form.serializeArray(),
             success: function(dataResult) {
               console.log("yipiiii data is storeddddd");

@@ -220,6 +220,10 @@ function account_data_child($node) {
 
     public function insert_coa($category_level,$subCategory_level){
 
+
+      $new_account = $this->input->post('sub_category',TRUE);
+      $txtHeadCode = $this->input->post('txtHeadCode',TRUE);
+
       $data = array(
         'sub_category' => $this->input->post('sub_category'),
         'category' => $this->input->post('category')
@@ -227,9 +231,9 @@ function account_data_child($node) {
   // $this->db->insert('items', $data);
 
 
-    echo json_encode($data);  
+    echo 'Toqeer'.$new_account.'Ariv'.$txtHeadCode;  
         // echo json_encode($this->input->post('newAccountData'));
-        die();
+        // die();
 
       if($this->input->post('is_subCategory',TRUE)){
         $PHeadName=$this->input->post('fetch_sub_options',TRUE);
@@ -277,6 +281,8 @@ function account_data_child($node) {
         'CreateBy'       => $createby,
         'CreateDate'     => $createdate,
       ); 
+
+      echo json_encode($postData); 
       $upinfo = $this->db->select('*')
       ->from('acc_coa')
       ->where('HeadCode',$headcode)
